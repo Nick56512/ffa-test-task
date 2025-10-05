@@ -2,6 +2,7 @@ import { Controller, Logger } from '@nestjs/common';
 import { EventPattern, Payload } from '@nestjs/microservices';
 import { RequestService } from '../request.service';
 import { RequestStatus } from '../entities/request.entity';
+import { RouterConsumerKeys } from 'src/common/routes/routes';
 
 @Controller()
 export class ConsumerController {
@@ -10,7 +11,7 @@ export class ConsumerController {
     this.logger = new Logger('Consumer');
   }
 
-  @EventPattern('update_status')
+  @EventPattern(RouterConsumerKeys.UpdateStatus)
   public updateStatus(@Payload() requestId: string) {
     this.logger.log(`🎯 Отримано заявку з ID: ${requestId}`);
 

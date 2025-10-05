@@ -10,3 +10,11 @@ export const enum ConfigParams {
   REDIS_HOST = 'REDIS_HOST',
   REDIS_PORT = 'REDIS_PORT',
 }
+
+export const enum InjectionKeys {
+  ClientProxyRequest = 'ClientProxyRequest',
+}
+
+export const enum CacheKeys {
+  CacheRequests = 'cacheRequests'
+}

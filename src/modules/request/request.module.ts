@@ -7,7 +7,8 @@ import { ConsumerController } from './consumer/consumer.controller';
 import { CacheModule } from '@nestjs/cache-manager';
 import { redisStore } from 'cache-manager-redis-store';
 import { ConfigService } from '@nestjs/config';
-import { ConfigParams } from 'src/common/config/config';
+import { ConfigParams, InjectionKeys } from 'src/common/config/config';
+import { ClientProxyFactory, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [
@@ -28,6 +29,20 @@ import { ConfigParams } from 'src/common/config/config';
     }),
   ],
   controllers: [RequestController, ConsumerController],
-  providers: [RequestService],
+  providers: [
+    RequestService,
+    {
+      provide: InjectionKeys.ClientProxyRequest,
+      useFactory: (configService: ConfigService) =>
+        ClientProxyFactory.create({
+          transport: Transport.RMQ,
+          options: {
+            urls: [configService.getOrThrow<string>(ConfigParams.AMQP_URL)],
+            queue: configService.getOrThrow<string>(ConfigParams.AMQP_QUEUE),
+          },
+        }),
+      inject: [ConfigService],
+    },
+  ],
 })
 export class RequestModule {}
