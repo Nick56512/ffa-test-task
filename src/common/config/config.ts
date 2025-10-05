@@ -7,4 +7,6 @@ export const enum ConfigParams {
   DB_NAME = 'DB_NAME',
   AMQP_URL = 'AMQP_URL',
   AMQP_QUEUE = 'AMQP_QUEUE',
+  REDIS_HOST = 'REDIS_HOST',
+  REDIS_PORT = 'REDIS_PORT',
 }
