@@ -4,5 +4,7 @@ export const enum ConfigParams {
   DB_PORT = 'DB_PORT',
   DB_USER = 'DB_USER',
   DB_PASS = 'DB_PASS',
-  DB_NAME = 'DB_NAME'
+  DB_NAME = 'DB_NAME',
+  AMQP_URL = 'AMQP_URL',
+  AMQP_QUEUE = 'AMQP_QUEUE',
 }
